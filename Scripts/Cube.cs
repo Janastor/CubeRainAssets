@@ -1,8 +1,5 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.Pool;
 using Random = UnityEngine.Random;
 
@@ -27,7 +24,7 @@ public class Cube : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.TryGetComponent(out CubeDespawner _) && _isDisappearing == false)
+        if (_isDisappearing == false && collision.collider.TryGetComponent(out CubeDespawner _))
             StartCoroutine(DisappearSequence());
     }
 
