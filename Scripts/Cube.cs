@@ -9,6 +9,7 @@ public class Cube : MonoBehaviour
 {
     private MeshRenderer _meshRenderer;
     private ObjectPool<Cube> _pool;
+    private BombSpawner _bombSpawner;
     private float _minColorValue = 0.25f;
     private float _maxColorValue = 0.9f;
     private float _minDisappearTime = 2f;
@@ -34,9 +35,10 @@ public class Cube : MonoBehaviour
         _meshRenderer.material.color = GetRandomColor();
     }
 
-    public void Init(ObjectPool<Cube> pool)
+    public void Init(ObjectPool<Cube> pool, BombSpawner bombSpawner)
     {
         _pool = pool;
+        _bombSpawner = bombSpawner;
         _isDisappearing = false;
         Colorize();
     }
@@ -51,6 +53,9 @@ public class Cube : MonoBehaviour
         _isDisappearing = true;
         Colorize();
         yield return new WaitForSeconds(Random.Range(_minDisappearTime, _maxDisappearTime));
+        Bomb bomb = _bombSpawner.GetBomb();
+        bomb.gameObject.SetActive(true);
+        bomb.Init(transform.position, Rigidbody.velocity, _bombSpawner.Pool);
         _pool.Release(this);
     }
 }
