@@ -9,8 +9,8 @@ public class SpawnerInfoDisplay : MonoBehaviour
     [SerializeField] private Spawner _spawner;
     [SerializeField] private string _descriptionText;
     
-    private string _spawnedText = "Spawned: {0}";
-    private string _activeText = "Active: {0}";
+    private string _spawnedText = "Spawned: ";
+    private string _activeText = "Active: ";
     private TMP_Text _text;
     
     private void Awake()
@@ -21,7 +21,7 @@ public class SpawnerInfoDisplay : MonoBehaviour
     private void Update()
     {
         _text.text = _descriptionText + "\n" +
-                     string.Format(_spawnedText, _spawner.SpawnedCount) +"\n"+
-                     string.Format(_activeText, _spawner.ActiveCount);
+                     _spawnedText + _spawner.SpawnedCount + "\n" +
+                     _activeText + _spawner.ActiveCount;
     }
 }
