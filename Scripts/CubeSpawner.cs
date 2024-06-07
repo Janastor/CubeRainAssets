@@ -1,16 +1,15 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-public class CubeSpawner : MonoBehaviour
+public class CubeSpawner : Spawner
 {
     [SerializeField] private Cube _cubePrefab;
     [SerializeField] private Bomb _bombPrefab;
     [SerializeField] private Vector3 _spawnAreaSize;
-    [SerializeField] private int _poolCapacity = 10;
-    [SerializeField] private int _poolSize = 10;
     [SerializeField] private float _spawnDelay = 1f;
     [SerializeField] private BombSpawner _bombSpawner;
 
@@ -21,7 +20,7 @@ public class CubeSpawner : MonoBehaviour
     private bool _isWorking = true;
     private WaitForSeconds _delay;
     private ObjectPool<Cube> _pool;
-
+    
     private void Awake()
     {
         _pool = new ObjectPool<Cube>
@@ -41,9 +40,9 @@ public class CubeSpawner : MonoBehaviour
         StartCoroutine(SpawnCubes());
     }
 
-    private void SpawnCube()
+    private void Update()
     {
-        
+        ActiveCount = _pool.CountActive;
     }
 
     private void OnCubeGet(Cube cube)
@@ -85,6 +84,7 @@ public class CubeSpawner : MonoBehaviour
         while (_isWorking)
         {
             _pool.Get();
+            SpawnedCount++;
             yield return _delay;
         }
     }

@@ -1,11 +1,10 @@
+using System;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class BombSpawner : MonoBehaviour
+public class BombSpawner : Spawner
 {
     [SerializeField] private Bomb _bombPrefab;
-    [SerializeField] private int _poolCapacity = 10;
-    [SerializeField] private int _poolSize = 10;
     
     public ObjectPool<Bomb> Pool { get; private set; }
     
@@ -20,9 +19,15 @@ public class BombSpawner : MonoBehaviour
             maxSize: _poolSize
         );
     }
-    
+
+    private void Update()
+    {
+        ActiveCount = Pool.CountActive;
+    }
+
     public Bomb GetBomb()
     {
+        SpawnedCount++;
         return Pool.Get();
     }
 }
