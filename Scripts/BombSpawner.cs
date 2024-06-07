@@ -6,7 +6,6 @@ public class BombSpawner : MonoBehaviour
     [SerializeField] private Bomb _bombPrefab;
     [SerializeField] private int _poolCapacity = 10;
     [SerializeField] private int _poolSize = 10;
-    [SerializeField] private float _spawnDelay = 1f;
     
     public ObjectPool<Bomb> Pool { get; private set; }
     
@@ -24,7 +23,6 @@ public class BombSpawner : MonoBehaviour
     
     public Bomb GetBomb()
     {
-        Bomb bomb = Pool.Get();
-        return bomb;
+        return Pool.Get();
     }
 }

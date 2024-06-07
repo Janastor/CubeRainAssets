@@ -21,7 +21,6 @@ public class CubeSpawner : MonoBehaviour
     private bool _isWorking = true;
     private WaitForSeconds _delay;
     private ObjectPool<Cube> _pool;
-    //private ObjectPool<Bomb> _bombPool;
 
     private void Awake()
     {
@@ -34,15 +33,6 @@ public class CubeSpawner : MonoBehaviour
             defaultCapacity: _poolCapacity,
             maxSize: _poolSize
         );
-        
-        // _bombPool = new ObjectPool<Bomb>
-        // (
-        //     createFunc: () => Instantiate(_bombPrefab, transform),
-        //     actionOnRelease: (obj) => obj.gameObject.SetActive(false),
-        //     actionOnDestroy: (obj) => Destroy(obj),
-        //     defaultCapacity: _poolCapacity,
-        //     maxSize: _poolSize
-        // );
     }
 
     private void Start()
