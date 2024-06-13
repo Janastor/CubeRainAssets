@@ -1,7 +1,3 @@
-using System;
-using UnityEngine;
-using UnityEngine.Pool;
-
 public class BombSpawner : Spawner<Bomb>
 {
     public Bomb GetBomb()

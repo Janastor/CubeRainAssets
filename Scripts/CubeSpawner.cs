@@ -1,8 +1,5 @@
-using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Pool;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class CubeSpawner : Spawner<Cube>
