@@ -16,7 +16,7 @@ public class Bomb : MonoBehaviour
     private float _minExplosionTime = 2f;
     private float _maxExplosionTime = 5f;
     private float _alpha = 1f;
-    private ObjectPool<Bomb> _pool;
+    private BombSpawner _spawner;
 
     private void Awake()
     {
@@ -24,11 +24,11 @@ public class Bomb : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
     }
 
-    public void Init(Vector3 position, Vector3 velocicy, ObjectPool<Bomb> pool)
+    public void Init(Vector3 position, Vector3 velocicy, BombSpawner spawner)
     {
         transform.position = position;
         _rigidbody.velocity = velocicy;
-        _pool = pool;
+        _spawner = spawner;
         StartCoroutine(ExplosionSequence());
     }
 
@@ -62,6 +62,6 @@ public class Bomb : MonoBehaviour
         }
         
         AddExplosionForce();
-        _pool.Release(this);
+        _spawner.Despawn(this);
     }
 }

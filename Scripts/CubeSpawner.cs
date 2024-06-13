@@ -5,10 +5,8 @@ using UnityEngine.Pool;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-public class CubeSpawner : Spawner
+public class CubeSpawner : Spawner<Cube>
 {
-    [SerializeField] private Cube _cubePrefab;
-    [SerializeField] private Bomb _bombPrefab;
     [SerializeField] private Vector3 _spawnAreaSize;
     [SerializeField] private float _spawnDelay = 1f;
     [SerializeField] private BombSpawner _bombSpawner;
@@ -19,34 +17,17 @@ public class CubeSpawner : Spawner
     private float _maxAngularVelocity = 2f;
     private bool _isWorking = true;
     private WaitForSeconds _delay;
-    private ObjectPool<Cube> _pool;
     
-    private void Awake()
-    {
-        _pool = new ObjectPool<Cube>
-        (
-            createFunc: () => Instantiate(_cubePrefab, transform),
-            actionOnGet: (obj) => OnCubeGet(obj),
-            actionOnRelease: (obj) => obj.gameObject.SetActive(false),
-            actionOnDestroy: (obj) => Destroy(obj),
-            defaultCapacity: _poolCapacity,
-            maxSize: _poolSize
-        );
-    }
-
     private void Start()
     {
         _delay = new WaitForSeconds(_spawnDelay);
         StartCoroutine(SpawnCubes());
     }
 
-    private void Update()
+    private void SpawnCube()
     {
-        ActiveCount = _pool.CountActive;
-    }
-
-    private void OnCubeGet(Cube cube)
-    {
+        Cube cube = Spawn();
+        
         cube.Rigidbody.velocity = Vector3.zero;
         cube.transform.position = GetRandomSpawnPoint();
         cube.transform.rotation = Quaternion.Euler(GetRandomRotation(_minRotation, _maxRotation));
@@ -83,8 +64,7 @@ public class CubeSpawner : Spawner
     {
         while (_isWorking)
         {
-            _pool.Get();
-            SpawnedCount++;
+            SpawnCube();
             yield return _delay;
         }
     }

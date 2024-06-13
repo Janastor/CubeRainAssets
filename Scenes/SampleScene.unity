@@ -209,7 +209,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &587906104
 RectTransform:
   m_ObjectHideFlags: 0
@@ -241,7 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f770eb98903572c4e9894da27e054444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawner: {fileID: 1486161849}
+  oldSpawner: {fileID: 0}
   _descriptionText: Cubes
 --- !u!114 &587906106
 MonoBehaviour:
@@ -663,7 +663,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1475259749
 RectTransform:
   m_ObjectHideFlags: 0
@@ -695,7 +695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f770eb98903572c4e9894da27e054444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawner: {fileID: 1978146345}
+  oldSpawner: {fileID: 0}
   _descriptionText: Bombs
 --- !u!114 &1475259751
 MonoBehaviour:
@@ -823,13 +823,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb2164cdf37bc3f47bcf1768ab76ad16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _prefab: {fileID: 4060314964269891789, guid: ec142e5af6c052443ba50d65e05580da, type: 3}
   _poolCapacity: 10
   _poolSize: 10
-  _cubePrefab: {fileID: 4060314964269891789, guid: ec142e5af6c052443ba50d65e05580da, type: 3}
-  _bombPrefab: {fileID: 3462209064823373804, guid: dd9414a79cf191246900f385449bdab4, type: 3}
   _spawnAreaSize: {x: 10, y: 0, z: 10}
   _spawnDelay: 1
-  _bombSpawner: {fileID: 1978146345}
+  _bombSpawner: {fileID: 1978146347}
 --- !u!4 &1486161850
 Transform:
   m_ObjectHideFlags: 0
@@ -1195,7 +1194,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1978146346}
-  - component: {fileID: 1978146345}
+  - component: {fileID: 1978146347}
   m_Layer: 0
   m_Name: BombSpawner
   m_TagString: Untagged
@@ -1203,21 +1202,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1978146345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1978146344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45931356b4bbf85479e3f8d0f8f55990, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _poolCapacity: 10
-  _poolSize: 10
-  _bombPrefab: {fileID: 3462209064823373804, guid: dd9414a79cf191246900f385449bdab4, type: 3}
 --- !u!4 &1978146346
 Transform:
   m_ObjectHideFlags: 0
@@ -1233,6 +1217,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1978146347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978146344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab1ae944343a6164686bc9b2007c6155, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 3462209064823373804, guid: dd9414a79cf191246900f385449bdab4, type: 3}
+  _poolCapacity: 10
+  _poolSize: 10
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
