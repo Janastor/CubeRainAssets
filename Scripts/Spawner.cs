@@ -33,12 +33,7 @@ public class Spawner<T> : MonoBehaviour, ISpawner where T : MonoBehaviour
             maxSize: _poolSize
         );
     }
-
-    private void Update()
-    {
-        _activeCount = _pool.CountActive;
-    }
-
+    
     public void Despawn(T item)
     {
         _pool.Release(item);
