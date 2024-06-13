@@ -7,10 +7,10 @@ using UnityEngine.Serialization;
 
 public class SpawnerInfoDisplay : MonoBehaviour
 {
-    [SerializeField] private MonoBehaviour _spawnerMono;
+    [SerializeField] private MonoBehaviour _spawner;
     [SerializeField] private string _descriptionText;
 
-    private ISpawner _spawner;
+    private ISpawner _spawnerInterface;
     private string _spawnedText = "Spawned: ";
     private string _activeText = "Active: ";
     private TMP_Text _text;
@@ -18,11 +18,11 @@ public class SpawnerInfoDisplay : MonoBehaviour
     private void Awake()
     {
         _text = GetComponent<TMP_Text>();
-        _spawner = _spawnerMono as ISpawner;
+        _spawnerInterface = _spawner as ISpawner;
 
-        if (_spawner != null)
+        if (_spawnerInterface != null)
         {
-            _spawner.StatsChanged += UpdateText;
+            _spawnerInterface.StatsChanged += UpdateText;
             UpdateText();
         }
     }
@@ -30,7 +30,7 @@ public class SpawnerInfoDisplay : MonoBehaviour
     private void UpdateText()
     {
         _text.text = _descriptionText + "\n" +
-                     _spawnedText + _spawner.SpawnedCount + "\n" +
-                     _activeText + _spawner.ActiveCount;
+                     _spawnedText + _spawnerInterface.SpawnedCount + "\n" +
+                     _activeText + _spawnerInterface.ActiveCount;
     }
 }
